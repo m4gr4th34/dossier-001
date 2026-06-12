@@ -6,7 +6,8 @@ Irfan Ali-Khan · Independent Researcher · Saratoga, California · June 2026
 
 [![claims: verified](https://github.com/m4gr4th34/dossier-001/actions/workflows/verify.yml/badge.svg)](https://github.com/m4gr4th34/dossier-001/actions/workflows/verify.yml)
 <!-- After Zenodo release, paste your DOI badge here: -->
-<!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
+<!-- [![DOI](https://zenodo.org/badge/1267581633.svg)](https://doi.org/10.5281/zenodo.20670769) -->
+[![DOI](https://zenodo.org/badge/1267581633.svg)](https://doi.org/10.5281/zenodo.20670769)
 
 ## What this is
 
