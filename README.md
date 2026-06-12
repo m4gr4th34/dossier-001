@@ -4,7 +4,7 @@
 *Don't trust this paper — run it.*
 Irfan Ali-Khan · Independent Researcher · Saratoga, California · June 2026
 
-[![claims: verified](https://github.com/YOURUSER/YOURREPO/actions/workflows/verify.yml/badge.svg)](https://github.com/YOURUSER/YOURREPO/actions/workflows/verify.yml)
+[![claims: verified](https://github.com/m4gr4th34/dossier-001/actions/workflows/verify.yml/badge.svg)](https://github.com/m4gr4th34/dossier-001/actions/workflows/verify.yml)
 <!-- After Zenodo release, paste your DOI badge here: -->
 <!-- [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXX) -->
 
@@ -24,8 +24,8 @@ versioned, and the adversarial review ships with the work.**
 
 ## Read it
 
-- **Living paper (start here):** https://YOURUSER.github.io/YOURREPO/
-- **Audit trail** (red team, citation audit, live checks): https://YOURUSER.github.io/YOURREPO/dossier.html
+- **Living paper (start here):** https://m4gr4th34.github.io/dossier-001/
+- **Audit trail** (red team, citation audit, live checks): https://m4gr4th34.github.io/dossier-001/dossier.html
 - **PDF:** [`paper/manuscript.pdf`](paper/manuscript.pdf)
 
 ## Run it
