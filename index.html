@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TL-DO-QKD — a living, executable paper (Ali-Khan, 2026)</title>
+<meta name="description" content="Temporal-imaging-enhanced dispersive-optics quantum key distribution. Every claim executable in your browser.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  :root{
+    --ink:#101d26; --ink2:#42525c; --paper:#f6f8f9; --card:#ffffff;
+    --teal:#0e7c7b; --coral:#e4572e; --violet:#6b4e9b;
+    --pass:#1e8e5a; --fail:#c9362c; --line:#d8e0e4;
+    --serif:'Spectral', Georgia, serif;
+    --mono:'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --sans:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:16px}
+  a{color:var(--teal)}
+  .wrap{max-width:920px;margin:0 auto;padding:0 20px}
+  header{padding:54px 0 26px;border-bottom:3px solid var(--ink)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+  .eyebrow b{color:var(--coral)}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(27px,4.6vw,44px);line-height:1.12;margin:.4em 0 .25em;letter-spacing:-.01em}
+  .byline{font-family:var(--serif);font-style:italic;color:var(--ink2)}
+  .abstract{font-family:var(--serif);font-size:17.5px;max-width:70ch;margin-top:18px}
+  .abstract b{color:var(--teal)}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px}
+  .btn{font-family:var(--mono);font-size:13.5px;font-weight:600;text-decoration:none;padding:11px 16px;border:1.5px solid var(--ink);color:var(--ink);background:var(--card)}
+  .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+  .btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+  section{padding:40px 0 8px}
+  h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:0 0 4px}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  .kicker.teal{color:var(--teal)} .kicker.coral{color:var(--coral)} .kicker.violet{color:var(--violet)}
+  p.lede{color:var(--ink2);max-width:66ch;margin-top:6px}
+
+  /* explorer */
+  .explorer{background:var(--card);border:1.5px solid var(--ink);margin-top:18px;padding:18px}
+  .controls{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px 22px}
+  .ctrl label{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+  .ctrl label output{color:var(--ink);font-weight:600}
+  input[type=range]{width:100%;accent-color:var(--teal)}
+  .readout{display:flex;gap:26px;flex-wrap:wrap;align-items:baseline;margin-top:18px;padding-top:16px;border-top:1px solid var(--line)}
+  .big{font-family:var(--serif);font-weight:800;font-size:52px;line-height:1;color:var(--teal)}
+  .big small{font-family:var(--mono);font-weight:400;font-size:13px;color:var(--ink2);display:block;margin-top:6px}
+  .mid{font-family:var(--mono);font-size:14px;color:var(--ink2)}
+  .mid b{color:var(--ink);font-size:18px}
+  .scale{position:relative;height:54px;margin:22px 4px 2px;border-bottom:2px solid var(--ink)}
+  .tickmark{position:absolute;bottom:0;transform:translateX(-50%);font-family:var(--mono);font-size:10.5px;color:var(--ink2);text-align:center}
+  .tickmark i{display:block;width:1.5px;height:8px;background:var(--ink2);margin:2px auto 0;font-style:normal}
+  .marker{position:absolute;bottom:10px;transform:translateX(-50%);text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--ink2);white-space:nowrap}
+  .marker i{display:block;width:2px;height:16px;margin:3px auto 0;font-style:normal}
+  .marker.m07 i{background:var(--violet)} .marker.m15 i{background:var(--violet)}
+  #you{position:absolute;bottom:8px;transform:translateX(-50%);text-align:center;font-family:var(--mono);font-size:11px;font-weight:600;color:var(--coral);transition:left .15s;white-space:nowrap}
+  #you i{display:block;width:0;height:0;border-left:7px solid transparent;border-right:7px solid transparent;border-top:11px solid var(--coral);margin:2px auto 0;font-style:normal}
+  .floor{position:absolute;right:0;top:-6px;font-family:var(--mono);font-size:10.5px;color:var(--fail)}
+  .note{font-size:12.5px;color:var(--ink2);margin-top:14px;font-family:var(--mono)}
+
+  /* console */
+  .console{background:var(--card);border:1.5px solid var(--ink);margin-top:18px}
+  .console-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .console-head .label{font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+  button#run{font-family:var(--mono);font-size:14px;font-weight:600;background:var(--teal);color:#fff;border:none;padding:10px 18px;cursor:pointer}
+  button#run:hover{background:#0a615f}
+  button#run:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+  button#run[disabled]{background:var(--ink2);cursor:default}
+  #log{font-family:var(--mono);font-size:13px;padding:10px 16px 14px;min-height:80px}
+  .row{display:flex;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+  .row:last-child{border-bottom:none}
+  .badge{flex:0 0 auto;font-weight:600;padding:1px 7px;font-size:11.5px}
+  .badge.p{color:var(--pass);border:1px solid var(--pass)}
+  .badge.f{color:var(--fail);border:1px solid var(--fail)}
+  .row .what{flex:1 1 auto;min-width:0}
+  .row .nums{flex:0 0 auto;color:var(--ink2)}
+  .tally{margin-top:10px;padding-top:10px;border-top:2px solid var(--ink);font-weight:600}
+
+  /* concept cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:16px}
+  details.card{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--violet)}
+  details.card summary{cursor:pointer;padding:13px 15px;font-weight:600;font-family:var(--serif);font-size:17px;list-style:none}
+  details.card summary::-webkit-details-marker{display:none}
+  details.card summary::after{content:'+';float:right;color:var(--violet);font-family:var(--mono)}
+  details.card[open] summary::after{content:'–'}
+  details.card .body{padding:0 15px 14px;color:var(--ink2);font-size:14.5px}
+  details.card summary:focus-visible{outline:3px solid var(--coral);outline-offset:-3px}
+
+  footer{margin-top:46px;padding:22px 0 56px;border-top:3px solid var(--ink);font-size:13.5px;color:var(--ink2)}
+  .mono{font-family:var(--mono)}
+  @media (prefers-reduced-motion: reduce){ #you{transition:none} .row{transition:none !important} }
+  @media (max-width:560px){ .big{font-size:42px} .row{flex-wrap:wrap} .row .nums{width:100%;padding-left:46px} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">An Open Dossier · <b>001</b> · v1.0 · June 2026</div>
+  <h1>Temporal-Imaging-Enhanced Dispersive-Optics Quantum Key Distribution</h1>
+  <div class="byline">Irfan Ali-Khan — Independent Researcher, Saratoga, California</div>
+  <p class="abstract">Energy–time entangled photon pairs carry 16–20 bits of potential key per coincidence; demonstrated systems extract 3–7, limited by detector timing jitter. This work proposes placing <b>single-photon time lenses</b> inside the receivers of a dispersive-optics QKD link, magnifying arrival-time structure before detection so the effective resolution beats the jitter by the magnification <i>M</i> — projecting 13–15 bits per coincidence and key rates of order 10<sup>8</sup> b/s from demonstrated components, with a <b>nonlocal variant</b> in which the fiber's own dispersion completes an imaging system that exists only in coincidences. Every number below is recomputable in your browser. <b>Don't trust this paper — run it.</b></p>
+  <div class="cta">
+    <a class="btn primary" href="#explore">Explore the result</a>
+    <a class="btn" href="paper/manuscript.pdf">Read the PDF</a>
+    <a class="btn" href="dossier.html">Audit trail</a>
+    <a class="btn" id="repolink" href="https://github.com/YOURUSER/YOURREPO">Source &amp; issues</a>
+  </div>
+</header>
+
+<section id="explore">
+  <div class="kicker teal">01 · Table 1, alive</div>
+  <h2>How many bits can one photon pair carry?</h2>
+  <p class="lede">This is the paper's central equation with handles on it. Pick a detector, a lens, and a guard factor; the photon information efficiency recomputes live from Eqs. (2)–(6) of the manuscript. The presets reproduce every row of Table&nbsp;1.</p>
+  <div class="explorer">
+    <div class="controls">
+      <div class="ctrl"><label>detector jitter τ<sub>j</sub> <output id="o-tj">30 ps</output></label>
+        <input type="range" id="tj" min="0" max="100" value="62" aria-label="detector jitter"></div>
+      <div class="ctrl"><label>magnification M <output id="o-m">158</output></label>
+        <input type="range" id="m" min="0" max="100" value="98" aria-label="magnification"></div>
+      <div class="ctrl"><label>lens point-spread δτ<sub>L</sub> <output id="o-dl">1.30 ps</output></label>
+        <input type="range" id="dl" min="0" max="100" value="79" aria-label="lens point spread"></div>
+      <div class="ctrl"><label>guard factor α <output id="o-al">4.0</output></label>
+        <input type="range" id="al" min="30" max="50" value="40" aria-label="guard factor"></div>
+    </div>
+    <div class="readout">
+      <div class="big"><span id="pie">13.1</span><small>bits per coincidence (PIE)</small></div>
+      <div class="mid">effective width σ<sub>obs</sub><br><b id="sig">1.86 ps</b></div>
+      <div class="mid">projected key rate*<br><b id="rate">3.1×10⁷ b/s</b></div>
+      <div class="mid">vs. no lens (M=1)<br><b id="gain">+4.5 bits</b></div>
+    </div>
+    <div class="scale" aria-hidden="true">
+      <span class="floor">17.3-bit correlation floor →</span>
+      <span class="tickmark" style="left:0%">0<i></i></span>
+      <span class="tickmark" style="left:33.3%">6<i></i></span>
+      <span class="tickmark" style="left:66.6%">12<i></i></span>
+      <span class="tickmark" style="left:100%">18<i></i></span>
+      <span class="marker m07" style="left:22.2%">2007 PRL · 4<i></i></span>
+      <span class="marker m15" style="left:38.3%">Zhong '15 · 6.9<i></i></span>
+      <span id="you" style="left:72.6%">you · 13.1<i></i></span>
+    </div>
+    <div class="note">presets:
+      <a href="#" data-p="350,1,0,40">2007 SPCM</a> ·
+      <a href="#" data-p="70,1,0,40">Zhong 2015</a> ·
+      <a href="#" data-p="30,158,1.3,40">demonstrated lens (Joshi '22)</a> ·
+      <a href="#" data-p="3,30,0.5,40">3 ps SNSPD + lens</a> ·
+      <a href="#" data-p="3,30,0.1,40">projected EO lens</a>
+      &nbsp;&nbsp;*8 ch × 10⁶ cps × κ=0.5 × 0.6·PIE, saturation-limited (Eq. 7)
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker coral">02 · The claims, executable</div>
+  <h2>Run the paper</h2>
+  <p class="lede">Sixteen checks recompute every number in the manuscript from its stated assumptions — the same arithmetic as the repository's <span class="mono">verify_numbers.py</span>, which CI reruns on every commit. During this paper's own audit, this process caught Table&nbsp;1 overstating its result by 1.5–2.5 bits; the paper was corrected, and the catch is published in the <a href="dossier.html">audit trail</a>.</p>
+  <div class="console">
+    <div class="console-head">
+      <span class="label">verification console · 16 checks · model: Eqs. (2)–(7)</span>
+      <button id="run">Run all 16 checks</button>
+    </div>
+    <div id="log" aria-live="polite"><div class="row"><span class="badge" style="color:var(--ink2);border:1px solid var(--line)">IDLE</span><span class="what" style="color:var(--ink2)">Awaiting run.</span></div></div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker violet">03 · Learn as you read</div>
+  <h2>The five ideas this paper stands on</h2>
+  <div class="cards">
+    <details class="card"><summary>Schmidt number — the alphabet's size</summary>
+      <div class="body">A cw-pumped down-conversion pair is correlated to ~100 femtoseconds but coherent over ~a microsecond. The ratio K = T<sub>coh</sub>/τ<sub>c</sub> counts the independent "letters" the pair can encode — 10⁵–10⁶ of them, i.e. 16–20 bits per detected pair. The whole game is reading letters as small as the correlation time.</div></details>
+    <details class="card"><summary>The time lens — a magnifier for moments</summary>
+      <div class="body">Dispersion is to time what diffraction is to space, so a quadratic phase in time acts exactly like a lens. Dispersion → lens → dispersion magnifies a waveform's time axis by M. Put one before your detector and a 30 ps-blurry detector resolves 30/M ps features. Demonstrated on single photons at M = 158 (Joshi et al., Optica 2022).</div></details>
+    <details class="card"><summary>Nonlocal dispersion cancellation — the strange one</summary>
+      <div class="body">The pair's frequencies are anticorrelated, so dispersion applied to one photon and opposite dispersion applied to its distant partner cancel — but only in the coincidences (Franson 1992). Each photon alone is a nanosecond blur; together they are sharp. The paper conscripts this twice: as the security check, and to let the fiber itself act as a lens element.</div></details>
+    <details class="card"><summary>Why not Franson interferometers?</summary>
+      <div class="body">The classic security check postselects on interferometer paths, and that postselection is a provable loophole — attacked with purely classical light (Jogenfors et al., Sci. Adv. 2015). The dispersive check involves no path postselection: two measured variances bound the eavesdropper's information through an entropic uncertainty relation.</div></details>
+    <details class="card"><summary>PIE — why bits-per-photon beats raw speed</summary>
+      <div class="body">Record QKD systems extract ≲1 bit per detected photon and win by clocking fast. Wherever detected photons are the scarce resource — long-haul fiber, satellites, saturated detectors, multiplexed networks — photon information efficiency sets the rate. Moving PIE from ~7 to ~13–15 bits is the claim of this work.</div></details>
+  </div>
+</section>
+
+<footer>
+  <b>How to review this paper:</b> run the checks, drag the sliders past their stated ranges, read the <a href="dossier.html">red-team findings</a> (1 resolved, 7 open — published, not hidden), then <a id="issuelink" href="https://github.com/YOURUSER/YOURREPO/issues">file an issue against any claim</a>. One claim is posted as an open challenge: the Section&nbsp;5 nonlocal-imaging derivation is labeled <span class="mono">OPEN-UNVERIFIED</span> in the claim ledger — the first correct treatment, confirming or refuting, is credited in v1.1. Every revision is versioned; nothing is memory-holed. Archived releases carry a DOI via Zenodo.
+  <br><br><span class="mono">Verification model: every claim carries a public, granular status — machine-recomputed, source-audited, reality-checked, or open. Claims nobody has verified are labeled, never asserted. AI-assistance disclosure: built with substantive AI assistance (Claude, Anthropic) — literature search, prior-art analysis, drafting, rate modeling, verification tooling, and this site. Responsibility rests with the author on the explicitly stated review basis above. · License: CC BY 4.0 (paper) / MIT (code)</span>
+</footer>
+
+</div>
+
+<script>
+// ---------- shared model (Eqs. 2-7) ----------
+const log2=x=>Math.log2(x), log10=x=>Math.log10(x), sq=x=>x*x;
+const eps=(tj,M,dL)=>Math.sqrt(sq(tj/M)+sq(dL));
+const sig=(tc,a,b)=>Math.sqrt(sq(tc)+sq(a)+sq(b));
+const pie=(Tf,al,s)=>log2(Tf/(al*s));
+const TC=0.1, TF=64000;
+
+// ---------- explorer ----------
+const S={tj:document.getElementById('tj'), m:document.getElementById('m'),
+         dl:document.getElementById('dl'), al:document.getElementById('al')};
+const tjVal=v=>3*Math.pow(350/3,v/100);          // 3..350 ps, log
+const mVal =v=>Math.round(Math.pow(200,v/100));  // 1..200, log
+const dlVal=v=>v===0?0:0.05*Math.pow(2/0.05,v/100); // 0, then 0.05..2 ps
+const alVal=v=>v/10;
+function nearest(fn,target,lo,hi){let best=lo,bd=1e9;for(let v=lo;v<=hi;v++){const d=Math.abs(fn(v)-target);if(d<bd){bd=d;best=v}}return best}
+function fmtRate(r){const e=Math.floor(log10(r));return (r/Math.pow(10,e)).toFixed(1)+'×10'+String(e).replace(/\d/g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[d])+' b/s'}
+function update(){
+  const tj=tjVal(+S.tj.value), M=mVal(+S.m.value), dL=dlVal(+S.dl.value), al=alVal(+S.al.value);
+  const e=eps(tj,M,dL), s=sig(TC,e,e), I=Math.max(0,pie(TF,al,s));
+  const I0=Math.max(0,pie(TF,al,sig(TC,tj,tj)));
+  document.getElementById('o-tj').textContent=tj.toFixed(tj<10?1:0)+' ps';
+  document.getElementById('o-m').textContent=M;
+  document.getElementById('o-dl').textContent=dL.toFixed(2)+' ps';
+  document.getElementById('o-al').textContent=al.toFixed(1);
+  document.getElementById('pie').textContent=I.toFixed(1);
+  document.getElementById('sig').textContent=s<1?(s*1000).toFixed(0)+' fs':s.toFixed(2)+' ps';
+  document.getElementById('rate').textContent=fmtRate(8*1e6*0.5*0.6*I);
+  document.getElementById('gain').textContent=(I-I0>=0?'+':'')+(I-I0).toFixed(1)+' bits';
+  const y=document.getElementById('you');
+  y.style.left=(Math.min(I,18)/18*100)+'%';
+  y.childNodes[0].textContent='you · '+I.toFixed(1);
+}
+Object.values(S).forEach(el=>el.addEventListener('input',update));
+document.querySelectorAll('.note a[data-p]').forEach(a=>a.addEventListener('click',ev=>{
+  ev.preventDefault(); const [tj,M,dL,al]=a.dataset.p.split(',').map(Number);
+  S.tj.value=nearest(tjVal,tj,0,100); S.m.value=nearest(mVal,M,0,100);
+  S.dl.value=dL===0?0:nearest(dlVal,dL,1,100); S.al.value=al; update();
+}));
+update();
+
+// ---------- verification console (port of verify_numbers.py) ----------
+function buildChecks(){
+  const c=[]; let e;
+  c.push(["Schmidt number, low end",0.1e-6/100e-15,[0.9e5,1.1e6]]);
+  c.push(["Schmidt number, high end",1.0e-6/100e-15,[0.9e6,1.1e7]]);
+  c.push(["bits at K=1e5 (claimed 16–20 band, low edge)",log2(1e5),[16,17]]);
+  c.push(["bits at K=1e6 (high edge)",log2(1e6),[19,20]]);
+  e=eps(3,10,0.5); c.push(["Sec 4.1 gain ΔI (τj=3, M=10, δτL=0.5) — ≈2.4 b",log2(sig(TC,3,3)/sig(TC,e,e)),[2.2,2.6]]);
+  e=eps(30,158,1.3); c.push(["Sec 4.1 gain ΔI (τj=30, M=158, δτL=1.3) — ≈4.5 b",log2(sig(TC,30,30)/sig(TC,e,e)),[4.3,4.7]]);
+  const I0=pie(TF,4,sig(TC,30,30)); c.push(["Sec 4.2 PIE without lens — ≈8.6 b",I0,[8.4,8.8]]);
+  e=eps(30,158,1.3); const I1=pie(TF,4,sig(TC,e,e)); c.push(["Sec 4.2 PIE with lens — ≈13.1 b",I1,[12.9,13.3]]);
+  c.push(["Sec 4.2 break-even η_L = I(1)/I(M) — ≳0.66",I0/I1,[0.63,0.69]]);
+  c.push(["Table 1 row: SNSPD 30 ps, M=158 — claimed 13 b",I1,[12.5,13.5]]);
+  e=eps(3,30,0.5); c.push(["Table 1 row: SNSPD 3 ps, M=30 — claimed 14–15 b",pie(TF,4,sig(TC,e,e)),[14,15]]);
+  e=eps(3,30,0.1); c.push(["projected PIE at δτL=0.1 ps — approaching 17",pie(TF,4,sig(TC,e,e)),[15.8,17]]);
+  c.push(["correlation-time floor — 17.3 b",pie(TF,4,sig(TC,0,0)),[17.1,17.5]]);
+  c.push(["key-rate order of magnitude (log10) — ~1e8 b/s",log10(8*1e6*0.5*0.6*I1),[7,9]]);
+  c.push(["ratio vs Zhong 2015, decades — 'two orders'",log10(1e8/2.7e6),[1.3,2.3]]);
+  c.push(["ratio vs 115.8 Mb/s record, |decades| — 'parity'",Math.abs(log10(1e8/115.8e6)),[0,0.5]]);
+  return c;
+}
+const fmt=v=>v>=1e4?v.toExponential(2):v.toFixed(2);
+const runBtn=document.getElementById('run'), logEl=document.getElementById('log');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+runBtn.addEventListener('click',()=>{
+  runBtn.disabled=true; logEl.innerHTML='';
+  const checks=buildChecks(); let pass=0;
+  checks.forEach((ck,i)=>{
+    const [label,val,[lo,hi]]=ck, ok=val>=lo&&val<=hi; if(ok)pass++;
+    const row=document.createElement('div'); row.className='row'; row.style.opacity='0';
+    row.innerHTML='<span class="badge '+(ok?'p':'f')+'">'+(ok?'PASS':'FAIL')+'</span>'+
+      '<span class="what">'+String(i+1).padStart(2,'0')+' · '+label+'</span>'+
+      '<span class="nums">'+fmt(val)+' ∈ ['+fmt(lo)+', '+fmt(hi)+']</span>';
+    logEl.appendChild(row);
+    const show=()=>{row.style.transition='opacity .25s';row.style.opacity='1'};
+    reduced?show():setTimeout(show,90*i);
+    if(i===checks.length-1){
+      const t=document.createElement('div'); t.className='tally';
+      t.textContent='TOTAL: '+checks.length+' checks · '+pass+' pass · '+(checks.length-pass)+' fail'+(pass===checks.length?' — the paper\u2019s numbers reproduce.':' — fix the paper, not the tolerance.');
+      const fin=()=>{logEl.appendChild(t);runBtn.disabled=false;runBtn.textContent='Run again'};
+      reduced?fin():setTimeout(fin,90*i+350);
+    }
+  });
+});
+</script>
+</body>
+</html>

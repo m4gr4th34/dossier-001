@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use or build on this work, please cite it as below."
+type: software
+title: "Temporal-Imaging-Enhanced Dispersive-Optics Quantum Key Distribution: Approaching the Schmidt Limit of Energy-Time Entanglement (Dossier 001)"
+authors:
+  - family-names: "Ali-Khan"
+    given-names: "Irfan"
+    affiliation: "Independent Researcher, Saratoga, California, USA"
+version: "1.0"
+date-released: "2026-06-12"
+license: "CC-BY-4.0"
+repository-code: "https://github.com/YOURUSER/YOURREPO"
+url: "https://YOURUSER.github.io/YOURREPO/"
+keywords:
+  - quantum key distribution
+  - energy-time entanglement
+  - time lens
+  - temporal imaging
+  - dispersive optics
+  - verified open research

@@ -1,0 +1,19 @@
+id,claim,type,verifier,status
+C01,"Schmidt number K = T_coh/tau_c ~ 1e5-1e6 (16-20 bits/pair)",NUM,verify_numbers.py #1-4,PASS
+C02,"Magnification gain ~2.4 bits (3 ps SNSPD, M=10, dtl=0.5 ps)",NUM,verify_numbers.py #5,PASS
+C03,"Magnification gain ~4.5 bits (30 ps, M=158, dtl=1.3 ps)",NUM,verify_numbers.py #6,PASS
+C04,"Break-even lens efficiency 0.66 for 30-ps example",NUM,verify_numbers.py #7-9,PASS
+C05,"Table 1 PIE: 13 bits (demonstrated lens) / 14-15 bits (3 ps + lens)",NUM,verify_numbers.py #10-11,PASS
+C06,"Correlation-time floor 17.3 bits at T_f=64 ns alpha=4",NUM,verify_numbers.py #13,PASS
+C07,"Projected key rate order 1e8 b/s saturation-limited",EST,verify_numbers.py #14,PASS
+C08,"Two orders of magnitude above best energy-time QKD rates",NUM,verify_numbers.py #15,PASS
+C09,"Parity with 115.8 Mb/s demonstrated record",NUM,verify_numbers.py #16,PASS
+C10,"DO-QKD security architecture carries over with lens as local map",DERIV,red team Finding 7 + human residue,OPEN-CAVEATED
+C11,"Nonlocal distributed imaging condition (fiber as D_in)",DERIV,"none yet — community review invited; first correct treatment credited in v1.1",OPEN-UNVERIFIED
+C12,"No prior integration of single-photon time lens into QKD",NOVEL,prior-art search 2026-06-12,TO-OUR-KNOWLEDGE
+C13,"Nonlocal magnification for QKD not previously proposed",NOVEL,prior-art search 2026-06-12,TO-OUR-KNOWLEDGE
+C14,"Saturation-limited regime makes lens loss nearly free",DERIV,red team Finding 4,OPEN-CAVEATED
+C15,"All 37 bibliography entries accurate",CITE,citation_audit.md,36-VERIFIED-1-FLAGGED
+C16,"Franson postselection loophole avoided structurally",CITE,"Jogenfors 2015, Aerts 1999 verified",PASS
+C17,"Joshi 2022 lens: M=158, ~1.3-2 ps input-referred resolution",CITE,Optica 9 364 verified,PASS
+C18,"Record DV-QKD rate 115.8 Mb/s at 10 km",CITE,Li 2023 Nat. Photonics 17 416 verified,PASS

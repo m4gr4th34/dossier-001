@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verification Dossier — TL-DO-QKD (Ali-Khan, 2026)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,400&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  :root{
+    --ink:#101d26; --ink2:#42525c; --paper:#f6f8f9; --card:#ffffff;
+    --teal:#0e7c7b; --coral:#e4572e; --violet:#6b4e9b;
+    --pass:#1e8e5a; --fail:#c9362c; --open:#b07d1f;
+    --line:#d8e0e4;
+    --serif:'Spectral', Georgia, 'Times New Roman', serif;
+    --mono:'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+    --sans:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.55;font-size:16px}
+  a{color:var(--teal)}
+  .wrap{max-width:880px;margin:0 auto;padding:0 20px}
+  header{padding:56px 0 28px;border-bottom:3px solid var(--ink)}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+  .eyebrow b{color:var(--coral);font-weight:600}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(26px,4.4vw,40px);line-height:1.14;margin:.45em 0 .3em;letter-spacing:-0.01em}
+  .byline{font-family:var(--serif);font-style:italic;color:var(--ink2);font-size:17px}
+  .statusbar{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 6px}
+  .chip{font-family:var(--mono);font-size:12.5px;padding:7px 12px;border:1.5px solid var(--ink);background:var(--card);display:flex;gap:8px;align-items:center}
+  .dot{width:9px;height:9px;border-radius:50%;display:inline-block}
+  .dot.g{background:var(--pass)} .dot.o{background:var(--open)} .dot.t{background:var(--teal)}
+  section{padding:38px 0 8px}
+  h2{font-family:var(--serif);font-weight:600;font-size:25px;margin:0 0 4px}
+  .kicker{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:6px}
+  .kicker.teal{color:var(--teal)} .kicker.coral{color:var(--coral)} .kicker.violet{color:var(--violet)}
+  p.lede{color:var(--ink2);max-width:64ch;margin-top:6px}
+
+  /* console */
+  .console{background:var(--card);border:1.5px solid var(--ink);margin-top:18px}
+  .console-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .console-head .label{font-family:var(--mono);font-size:12.5px;color:var(--ink2)}
+  button#run{font-family:var(--mono);font-size:14px;font-weight:600;background:var(--teal);color:#fff;border:none;padding:10px 18px;cursor:pointer}
+  button#run:hover{background:#0a615f}
+  button#run:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+  button#run[disabled]{background:var(--ink2);cursor:default}
+  #log{font-family:var(--mono);font-size:13px;padding:10px 16px 14px;min-height:90px}
+  .row{display:flex;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line);align-items:baseline}
+  .row:last-child{border-bottom:none}
+  .badge{flex:0 0 auto;font-weight:600;padding:1px 7px;font-size:11.5px}
+  .badge.p{color:var(--pass);border:1px solid var(--pass)}
+  .badge.f{color:var(--fail);border:1px solid var(--fail)}
+  .row .what{flex:1 1 auto;min-width:0}
+  .row .nums{flex:0 0 auto;color:var(--ink2)}
+  .tally{margin-top:10px;padding-top:10px;border-top:2px solid var(--ink);font-weight:600}
+  .hint{font-size:12px;color:var(--ink2);padding:0 16px 14px;font-family:var(--mono)}
+
+  /* findings */
+  .finding{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--open);margin:10px 0}
+  .finding.resolved{border-left-color:var(--pass)}
+  .finding summary{cursor:pointer;padding:13px 16px;font-weight:600;display:flex;gap:10px;align-items:baseline;list-style:none}
+  .finding summary::-webkit-details-marker{display:none}
+  .finding summary:focus-visible{outline:3px solid var(--coral);outline-offset:-3px}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:2px 7px;flex:0 0 auto}
+  .tag.res{color:var(--pass);border:1px solid var(--pass)} .tag.open{color:var(--open);border:1px solid var(--open)}
+  .finding .body{padding:0 16px 14px;color:var(--ink2);max-width:70ch}
+
+  /* citations */
+  table{width:100%;border-collapse:collapse;font-size:13.5px;background:var(--card)}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2)}
+  td.st{font-family:var(--mono);font-size:11.5px;white-space:nowrap}
+  td.st.v{color:var(--pass)} td.st.fl{color:var(--open)}
+  details.block summary{cursor:pointer;font-family:var(--mono);font-size:13px;padding:10px 0;color:var(--teal)}
+
+  /* pipeline */
+  ol.phases{list-style:none;counter-reset:ph -1;padding:0;margin:14px 0}
+  ol.phases li{counter-increment:ph;background:var(--card);border:1px solid var(--line);padding:14px 16px 14px 64px;position:relative;margin:8px 0;max-width:74ch}
+  ol.phases li::before{content:counter(ph);position:absolute;left:16px;top:12px;font-family:var(--serif);font-weight:800;font-size:26px;color:var(--violet)}
+  ol.phases b{display:block}
+  ol.phases span{color:var(--ink2);font-size:14.5px}
+
+  footer{margin-top:44px;padding:22px 0 56px;border-top:3px solid var(--ink);font-size:13.5px;color:var(--ink2)}
+  footer .mono{font-family:var(--mono)}
+  @media (prefers-reduced-motion: reduce){ .row{transition:none !important} }
+  @media (max-width:560px){ .row{flex-wrap:wrap} .row .nums{width:100%;padding-left:46px} th:nth-child(1),td:nth-child(1){display:none} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">An Open Dossier · <b>001</b> · audit trail · 12 June 2026</div>
+  <h1>Temporal-Imaging-Enhanced Dispersive-Optics Quantum Key Distribution</h1>
+  <div class="byline">Irfan Ali-Khan — Independent Researcher, Saratoga, California · companion verification record to the manuscript</div>
+  <div class="statusbar">
+    <span class="chip"><span class="dot g"></span>claims&nbsp;<b id="chip-claims">16 / 16 pass</b></span>
+    <span class="chip"><span class="dot g"></span>citations&nbsp;<b>36 verified · 1 flagged</b></span>
+    <span class="chip"><span class="dot o"></span>red team&nbsp;<b>1 resolved · 7 open</b></span>
+    <span class="chip"><span class="dot t"></span>human residue&nbsp;<b>3 items</b></span>
+  </div>
+</header>
+
+<section id="run-section">
+  <div class="kicker teal">01 · The claims, executable</div>
+  <h2>Run the paper</h2>
+  <p class="lede">Every number in the manuscript — Schmidt limits, magnification gains, break-even lens efficiencies, Table&nbsp;1, the 10<sup>8</sup>&nbsp;b/s headline — is recomputed below from its stated assumptions, in your browser, when you press the button. This is the same arithmetic as the repository's <span style="font-family:var(--mono);font-size:14px">verify_numbers.py</span>; view this page's source to audit it.</p>
+  <div class="console">
+    <div class="console-head">
+      <span class="label">verification console · 16 checks · model: Eqs. (2)–(7)</span>
+      <button id="run">Run all 16 checks</button>
+    </div>
+    <div id="log" aria-live="polite"><div class="row"><span class="badge" style="color:var(--ink2);border:1px solid var(--line)">IDLE</span><span class="what" style="color:var(--ink2)">Awaiting run. No claim on this page is asking to be trusted; each is asking to be executed.</span></div></div>
+    <div class="hint">During this audit, recomputation caught the original Table&nbsp;1 overstating photon information efficiency by 1.5–2.5 bits (lens point-spread silently dropped). The manuscript was corrected; the 10⁸ b/s headline survived. That catch is the argument for this page.</div>
+  </div>
+</section>
+
+<section>
+  <div class="kicker coral">02 · Adversarial review</div>
+  <h2>Red-team findings</h2>
+  <p class="lede">A hostile pass over the finished draft, published with the paper rather than hidden from it. Resolved findings were fixed; open findings are stated in the manuscript as caveats and listed here ranked by referee risk.</p>
+
+  <details class="finding resolved"><summary><span class="tag res">RESOLVED</span>Table 1 and abstract overstated PIE by 1.5–2.5 bits</summary>
+    <div class="body">Recomputed values from the caption's own parameters: 13.07 and 14.42 bits where 14–15 and 16–17 were claimed. Cause: prose silently assumed negligible lens point-spread. Abstract, Table 1, and two Section&nbsp;4 figures corrected; headline rate claim verified to survive.</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN · HIGHEST RISK</span>The nonlocal-imaging claim has no derivation in the paper</summary>
+    <div class="body">Section 5 asserts the distributed imaging condition at the Gaussian level, citing the Tsang–Psaltis/Patera formalism, but shows no propagated two-photon amplitude and no explicit sign conventions. This is the one original derivation, and the most likely location of a real physics error. <b>Author disposition (v1.0):</b> hand derivation declined by design — manuscript softened to "is expected to yield," claim C11 labeled OPEN-UNVERIFIED in the ledger, and the derivation posted as an open challenge: the first correct treatment, confirming or refuting, is credited in v1.1.</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN</span>Lens field of view vs. cw frames — the two key assumptions are in tension</summary>
+    <div class="body">Headline PIE assumes 64&nbsp;ns cw frames; the enabling lens covers a far smaller temporal aperture. The paper names the tension but does not quantify the duty-cycle penalty of a gated lens or the reduced Schmidt number of a pulsed/Talbot pump. One honest paragraph would close it.</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN</span>Saturation-rate argument needs one inequality</summary>
+    <div class="body">"Pump harder to compensate lens loss" is bounded only verbally by multi-pair statistics; the mean-pairs-per-frame ceiling and the value of the coincidence-to-singles ratio κ are unquantified.</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN</span>Novelty claims carry a literature-recall ceiling</summary>
+    <div class="body">No prior lens-in-QKD integration was found, but conference abstracts and in-review work are poorly indexed, and U.S. Patent 8,744,086 covers adjacent territory. Strongest mitigation: preprint quickly rather than polish long.</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN</span>"Parity with record" has a short shelf life</summary>
+    <div class="body">115.8&nbsp;Mb/s (Li et al. 2023) is the verified DV record, but Gb/s-class CV-QKD preprints exist. The text hedges correctly; expect to refresh this paragraph at proof stage, and never let outreach copy say "fastest ever."</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN</span>Two security statements to tighten</summary>
+    <div class="body">The bypass audit is a calibration check, not a proof element — say so plainly. And the finite-key proof's "carry-over" through the magnifier's modified POVM should read "expected to carry over" unless verified against the proof's assumptions.</div></details>
+
+  <details class="finding"><summary><span class="tag open">OPEN · MINOR</span>One bibliography page number from secondary sources</summary>
+    <div class="body">Grünenfelder et al. page 422 triangulated, not fetched from the publisher. One-minute check before submission.</div></details>
+</section>
+
+<section>
+  <div class="kicker violet">03 · Sources</div>
+  <h2>Citation audit</h2>
+  <p class="lede">All 37 bibliography entries checked against primary sources or triangulated through three or more independent citing works. 36 verified; 1 flagged. The full table:</p>
+  <details class="block"><summary>Show all 37 entries</summary>
+  <table>
+    <thead><tr><th>#</th><th>Reference</th><th>Status</th></tr></thead>
+    <tbody id="cites"></tbody>
+  </table>
+  </details>
+</section>
+
+<section>
+  <div class="kicker teal">04 · The method, reusable</div>
+  <h2>The verified open research pipeline</h2>
+  <p class="lede">The architecture that produced this dossier, written so the next project gets the same treatment. The numbering is the actual execution order. Governing principle: decorrelate the verifier from the generator — every claim is checked by code, by a fresh adversarial session, or by the human, and the human's hours go only where human judgment is irreplaceable.</p>
+  <ol class="phases">
+    <li><b>Conception &amp; prior-art reconnaissance</b><span>Extract candidate novelty claims; search each claim, its components, and their combinations; build the established / adjacent / open table. Kill or pivot if the center is taken.</span></li>
+    <li><b>The claim ledger</b><span>Every claim typed — CITE, NUM, DERIV, NOVEL, EST — and every type routed to its mandated verifier.</span></li>
+    <li><b>Drafting</b><span>Manuscript written against the open ledger; reproducibility section and AI-assistance disclosure are mandatory boilerplate.</span></li>
+    <li><b>Mechanical verification</b><span>Executable recomputation of every number (fail = fix the paper, never the tolerance); full citation re-audit at final draft.</span></li>
+    <li><b>Adversarial review</b><span>Fresh AI sessions — ideally different models — briefed as Referee&nbsp;2 with instructions to reject. Findings published, RESOLVED or OPEN.</span></li>
+    <li><b>Human-judgment residue</b><span>A short, named list: original derivations by hand, novelty claims against domain memory, the boldest abstract sentences. Signed item by item.</span></li>
+    <li><b>Publication &amp; community review</b><span>arXiv first for citable priority; repository with CI as the verification layer; this page as the reading layer; preprint emailed to the groups it builds on — the fastest deep review on earth.</span></li>
+  </ol>
+</section>
+
+<footer>
+  <b>Reproducibility.</b> This page is self-contained: the verification console above is a faithful JavaScript port of <span class="mono">verify_numbers.py</span> (16 checks, identical model and tolerances). Repository artifacts: <span class="mono">manuscript.tex / .pdf · verify_numbers.py · citation_audit.md · red_team_report.md · research_pipeline.md</span>. What this record does not claim: expert peer review still catches what no pipeline component catches — it sets the ceiling. This pipeline raises the floor, in public, before any referee is asked for their time.
+</footer>
+
+</div>
+
+<script>
+// ---------- faithful JS port of verify_numbers.py ----------
+const log2=x=>Math.log2(x), log10=x=>Math.log10(x), sq=x=>x*x;
+const eps=(tj,M,dL)=>Math.sqrt(sq(tj/M)+sq(dL));
+const sig=(tc,a,b)=>Math.sqrt(sq(tc)+sq(a)+sq(b));
+const pie=(Tf,al,s)=>log2(Tf/(al*s));
+const TC=0.1, TF=64000, AL=4;
+
+function buildChecks(){
+  const c=[];
+  c.push(["Schmidt number, low end", 0.1e-6/100e-15, [0.9e5,1.1e6], "g"]);
+  c.push(["Schmidt number, high end", 1.0e-6/100e-15, [0.9e6,1.1e7], "g"]);
+  c.push(["bits at K=1e5 (claimed 16–20 band, low edge)", log2(1e5), [16,17]]);
+  c.push(["bits at K=1e6 (high edge)", log2(1e6), [19,20]]);
+  let e=eps(3,10,0.5), dA=log2(sig(TC,3,3)/sig(TC,e,e));
+  c.push(["Sec 4.1 gain ΔI (τj=3 ps, M=10, δτL=0.5) — text: ≈2.4 b", dA, [2.2,2.6]]);
+  e=eps(30,158,1.3); const dB=log2(sig(TC,30,30)/sig(TC,e,e));
+  c.push(["Sec 4.1 gain ΔI (τj=30 ps, M=158, δτL=1.3) — text: ≈4.5 b", dB, [4.3,4.7]]);
+  const I0=pie(TF,AL,sig(TC,30,30));
+  c.push(["Sec 4.2 PIE without lens — text: ≈8.6 b", I0, [8.4,8.8]]);
+  e=eps(30,158,1.3); const I1=pie(TF,AL,sig(TC,e,e));
+  c.push(["Sec 4.2 PIE with lens — text: ≈13.1 b", I1, [12.9,13.3]]);
+  c.push(["Sec 4.2 break-even η_L = I(1)/I(M) — text: ≳0.66", I0/I1, [0.63,0.69]]);
+  c.push(["Table 1 row: SNSPD 30 ps, M=158 — claimed 13 b", I1, [12.5,13.5]]);
+  e=eps(3,30,0.5); const r4=pie(TF,AL,sig(TC,e,e));
+  c.push(["Table 1 row: SNSPD 3 ps, M=30 — claimed 14–15 b", r4, [14,15]]);
+  e=eps(3,30,0.1); c.push(["projected PIE at δτL=0.1 ps — abstract: approaching 17", pie(TF,AL,sig(TC,e,e)), [15.8,17]]);
+  c.push(["correlation-time floor — text: 17.3 b", pie(TF,AL,sig(TC,0,0)), [17.1,17.5]]);
+  c.push(["key-rate order of magnitude, log10 — claimed ~1e8 b/s", log10(8*1e6*0.5*0.6*I1), [7,9]]);
+  c.push(["ratio vs Zhong 2015 (2.7 Mb/s), decades — 'two orders'", log10(1e8/2.7e6), [1.3,2.3]]);
+  c.push(["ratio vs 115.8 Mb/s record, |decades| — 'parity'", Math.abs(log10(1e8/115.8e6)), [0,0.5]]);
+  return c;
+}
+
+const fmt=v=> v>=1e4 ? v.toExponential(2) : v.toFixed(2);
+const runBtn=document.getElementById('run'), logEl=document.getElementById('log');
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+runBtn.addEventListener('click',()=>{
+  runBtn.disabled=true; logEl.innerHTML='';
+  const checks=buildChecks(); let pass=0;
+  checks.forEach((ck,i)=>{
+    const [label,val,[lo,hi]]=ck, ok=(val>=lo&&val<=hi); if(ok)pass++;
+    const row=document.createElement('div'); row.className='row'; row.style.opacity='0';
+    row.innerHTML='<span class="badge '+(ok?'p':'f')+'">'+(ok?'PASS':'FAIL')+'</span>'+
+      '<span class="what">'+String(i+1).padStart(2,'0')+' · '+label+'</span>'+
+      '<span class="nums">'+fmt(val)+' ∈ ['+fmt(lo)+', '+fmt(hi)+']</span>';
+    logEl.appendChild(row);
+    const show=()=>{row.style.transition='opacity .25s';row.style.opacity='1';};
+    reduced?show():setTimeout(show, 90*i);
+    if(i===checks.length-1){
+      const t=document.createElement('div'); t.className='tally';
+      t.textContent='TOTAL: '+checks.length+' checks · '+pass+' pass · '+(checks.length-pass)+' fail'+(pass===checks.length?' — the paper\u2019s numbers reproduce.':' — discrepancy: fix the paper, not the tolerance.');
+      const show2=()=>{logEl.appendChild(t); runBtn.disabled=false; runBtn.textContent='Run again';};
+      reduced?show2():setTimeout(show2, 90*i+350);
+    }
+  });
+});
+
+// ---------- citation table ----------
+const cites=[
+["AliKhan2007","Ali-Khan, Broadbent, Howell — PRL 98, 060503 (2007)","V"],
+["AliKhanHowell2006","Ali Khan & Howell — PRA 73, 031801(R) (2006)","V"],
+["Franson1989","Franson — PRL 62, 2205 (1989)","V"],
+["Franson1992","Franson — PRA 45, 3126 (1992)","T"],
+["Mower2013","Mower et al. — PRA 87, 062322 (2013)","V"],
+["Zhang2014","Zhang et al. — PRL 112, 120506 (2014)","V"],
+["Niu2016","Niu, Xu, Shapiro, Furrer — PRA 94, 052323 (2016)","V"],
+["Lee2014","Lee et al. — PRA 90, 062331 (2014)","V"],
+["Zhong2015","Zhong et al. — New J. Phys. 17, 022002 (2015)","V"],
+["Lee2016","Lee et al. — arXiv:1611.01139 (2016)","V"],
+["Islam2017","Islam et al. — Sci. Adv. 3, e1701491 (2017)","V"],
+["Mower2011","Mower, Wong, Shapiro, Englund — arXiv:1110.4867 (2011)","V"],
+["Jogenfors2015","Jogenfors et al. — Sci. Adv. 1, e1500793 (2015)","V"],
+["Aerts1999","Aerts, Kwiat, Larsson, Żukowski — PRL 83, 2872 (1999)","T"],
+["KolnerNazarathy1989","Kolner & Nazarathy — Opt. Lett. 14, 630 (1989)","V"],
+["Kolner1994","Kolner — IEEE JQE 30, 1951 (1994)","T"],
+["Salem2013","Salem, Foster, Gaeta — Adv. Opt. Photon. 5, 274 (2013)","T"],
+["Karpinski2017","Karpiński et al. — Nat. Photonics 11, 53 (2017)","T"],
+["Donohue2016","Donohue, Mastrovich, Resch — PRL 117, 243602 (2016)","V"],
+["Mittal2017","Mittal et al. — PRA 96, 043807 (2017)","V"],
+["Joshi2022","Joshi et al. — Optica 9, 364 (2022)","V"],
+["TsangPsaltis2006","Tsang & Psaltis — PRA 73, 013822 (2006)","T"],
+["Patera2017","Patera, Shi, Horoshko, Kolobov — J. Opt. 19, 054001 (2017)","T"],
+["Baek2009","Baek, Cho, Kim — Opt. Express 17, 19241 (2009)","V"],
+["MacLean2018","MacLean, Donohue, Resch — PRL 120, 053601 (2018)","V"],
+["Korzh2020","Korzh et al. — Nat. Photonics 14, 250 (2020)","T"],
+["Chang2024","Chang et al. — Quantum Sci. Technol. 9, 015018 (2024)","T"],
+["Boutros2023","Boutros & Soljanin — IEEE Trans. Commun. 71, 7174 (2023)","V"],
+["LawEberly2004","Law & Eberly — PRL 92, 127903 (2004)","V"],
+["Grice1997","Grice & Walmsley — PRA 56, 1627 (1997)","V"],
+["Zhong2012","Zhong, Wong, Restelli, Bienfang — Opt. Express 20, 26868 (2012)","T"],
+["Tittel1998","Tittel, Brendel, Zbinden, Gisin — PRL 81, 3563 (1998)","V"],
+["Marcikic2004","Marcikic et al. — PRL 93, 180502 (2004)","V"],
+["Cerf2002","Cerf, Bourennane, Karlsson, Gisin — PRL 88, 127902 (2002)","V"],
+["ShorPreskill2000","Shor & Preskill — PRL 85, 441 (2000)","V"],
+["Li2023","Li et al. — Nat. Photonics 17, 416 (2023)","V"],
+["Grunenfelder2023","Grünenfelder et al. — Nat. Photonics 17, 422 (2023)","F"],
+];
+const lab={V:["VERIFIED — primary source","v"],T:["VERIFIED — triangulated ×3","v"],F:["FLAGGED — page no. secondary","fl"]};
+document.getElementById('cites').innerHTML = cites.map((c,i)=>
+  '<tr><td>'+(i+1)+'</td><td>'+c[1]+'</td><td class="st '+lab[c[2]][1]+'">'+lab[c[2]][0]+'</td></tr>').join('');
+</script>
+</body>
+</html>

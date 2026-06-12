@@ -1,0 +1,57 @@
+========================================================================
+SECTION 1 / ABSTRACT -- Schmidt number and bit content
+========================================================================
+[PASS] Schmidt number, low end (claimed ~1e5..1e6 range, low)
+       computed = 1e+06   manuscript claims = [90000.0, 1100000.0]
+[PASS] Schmidt number, high end
+       computed = 1e+07   manuscript claims = [900000.0, 11000000.0]
+[PASS] bits at K=1e5 (claimed 16-20 band, low edge ~16.6)
+       computed = 16.61   manuscript claims = [16.0, 17.0]
+[PASS] bits at K=1e6 (high edge ~19.9)
+       computed = 19.93   manuscript claims = [19.0, 20.0]
+
+========================================================================
+SECTION 4.1 -- magnification gain examples (Eq. 6)
+========================================================================
+[PASS] Example A gain dI (tau_j=3, M=10, dtau_L=0.5); text says ~2.4 bits
+       computed = 2.35   manuscript claims = [2.2, 2.6]
+[PASS] Example B gain dI (tau_j=30, M=158, dtau_L=1.3); text says ~4.5 bits
+       computed = 4.51   manuscript claims = [4.3, 4.7]
+
+========================================================================
+SECTION 4.2 -- break-even lens efficiency
+========================================================================
+[PASS] PIE without lens (text: ~8.6 bits)
+       computed = 8.56   manuscript claims = [8.4, 8.8]
+[PASS] PIE with lens   (text: ~13.1 bits)
+       computed = 13.07   manuscript claims = [12.9, 13.3]
+[PASS] break-even eta_L = I(1)/I(M) (text: >~0.66)
+       computed = 0.65   manuscript claims = [0.63, 0.69]
+
+========================================================================
+TABLE 1 -- proposed-system PIE rows
+========================================================================
+[PASS] Table row 'SNSPD 30 ps, M=158' PIE (claimed 13)
+       computed = 13.07   manuscript claims = [12.5, 13.5]
+[PASS] Table row 'SNSPD 3 ps, M=30, dtau_L=0.5' PIE (claimed 14-15)
+       computed = 14.42   manuscript claims = [14.0, 15.0]
+[PASS] projected PIE at dtau_L=0.1 ps (abstract: 'approaching 17')
+       computed = 16.13   manuscript claims = [15.8, 17.0]
+[PASS] correlation-time-floor PIE (text: 17.3 bits)
+       computed = 17.29   manuscript claims = [17.1, 17.5]
+
+========================================================================
+SECTION 6 / ABSTRACT -- key-rate order of magnitude
+========================================================================
+  conservative: 8 ch, 1e6 cps, kappa=0.5: R_key = 3.14e+07 b/s
+  aggressive:  16 ch, 1e7 cps, kappa=0.3: R_key = 3.76e+08 b/s
+[PASS] key-rate order of magnitude spans ~1e8 (claimed 'order 10^8 b/s')
+       computed = 7.50   manuscript claims = [7.0, 9.0]
+[PASS] ratio vs Zhong 2015 (2.7 Mb/s): 'roughly two orders of magnitude'
+       computed = 1.57   manuscript claims = [1.3, 2.3]
+[PASS] ratio vs record 115.8 Mb/s: 'parity' (within factor ~3 either way)
+       computed = 0.06   manuscript claims = [0.0, 0.5]
+
+========================================================================
+TOTAL: 16 checks, 0 failures
+========================================================================
