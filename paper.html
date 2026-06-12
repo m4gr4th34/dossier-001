@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Self-Explaining Edition — TL-DO-QKD (Dossier 001)</title>
+<meta name="description" content="The full paper, written to explain itself. Tap any underlined term. Tap any citation. No rabbit holes.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,800;1,400;1,600&family=IBM+Plex+Mono:wght@400;600&display=swap');
+  :root{
+    --ink:#101d26;--ink2:#42525c;--paper:#f6f8f9;--card:#ffffff;
+    --teal:#0e7c7b;--teal-soft:#e3f0f0;--coral:#e4572e;--violet:#6b4e9b;--violet-soft:#efe9f6;
+    --pass:#1e8e5a;--open:#b07d1f;--line:#d8e0e4;
+    --serif:'Spectral',Georgia,serif;
+    --mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.65}
+  .wrap{max-width:720px;margin:0 auto;padding:0 20px}
+  a{color:var(--teal)}
+  header{padding:54px 0 10px}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2)}
+  .eyebrow b{color:var(--coral)}
+  h1{font-family:var(--serif);font-weight:800;font-size:clamp(28px,5vw,42px);line-height:1.12;margin:.4em 0 .2em;letter-spacing:-.01em}
+  .byline{font-family:var(--serif);font-style:italic;color:var(--ink2);margin-bottom:18px}
+  .howto{background:var(--card);border:1.5px solid var(--ink);padding:14px 16px;font-size:15px;margin:18px 0 8px}
+  .howto .mono{font-family:var(--mono);font-size:13px}
+  h2{font-family:var(--serif);font-weight:600;font-size:27px;margin:48px 0 6px;line-height:1.2}
+  h2 .num{color:var(--coral);font-family:var(--mono);font-size:15px;font-weight:600;vertical-align:middle;margin-right:10px}
+  p{margin:14px 0;max-width:68ch}
+
+  /* tappable terms */
+  .term{background:linear-gradient(transparent 70%, var(--teal-soft) 70%);border:none;border-bottom:1.5px dashed var(--teal);
+        padding:0 1px;font:inherit;color:inherit;cursor:pointer;text-align:left}
+  .term:focus-visible{outline:2.5px solid var(--coral);outline-offset:2px}
+  /* citation chips */
+  .cite{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--violet);background:var(--violet-soft);
+        border:1px solid var(--violet);border-radius:10px;padding:1px 8px;cursor:pointer;vertical-align:2px}
+  .cite:focus-visible{outline:2.5px solid var(--coral);outline-offset:2px}
+  /* the expansion card both produce */
+  .popcard{display:block;background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal);
+           padding:12px 14px;margin:10px 0;font-size:15px;color:var(--ink2);max-width:68ch;animation:open .18s ease-out}
+  .popcard.citecard{border-left-color:var(--violet)}
+  .popcard b{color:var(--ink)}
+  .popcard .src{font-family:var(--mono);font-size:11.5px;color:var(--ink2);display:block;margin-top:6px}
+  @keyframes open{from{opacity:0;transform:translateY(-3px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.popcard{animation:none}}
+
+  /* go-deeper layers */
+  details.deeper{background:var(--card);border:1px solid var(--line);margin:16px 0}
+  details.deeper summary{cursor:pointer;padding:12px 15px;font-family:var(--mono);font-size:13px;font-weight:600;color:var(--violet);list-style:none}
+  details.deeper summary::-webkit-details-marker{display:none}
+  details.deeper summary::before{content:'▸ ';color:var(--violet)}
+  details.deeper[open] summary::before{content:'▾ '}
+  details.deeper .body{padding:0 15px 14px;font-size:15px;color:var(--ink2)}
+  details.deeper .eq{font-family:var(--mono);font-size:14px;background:var(--paper);padding:10px 12px;margin:8px 0;overflow-x:auto}
+
+  .openclaim{background:#fdf6e9;border:1px solid var(--open);border-left:5px solid var(--open);padding:14px 16px;margin:18px 0;font-size:15.5px}
+  .openclaim .tag{font-family:var(--mono);font-size:11px;color:var(--open);border:1px solid var(--open);padding:2px 7px;margin-right:8px}
+  .punch{font-family:var(--serif);font-style:italic;font-size:20px;border-left:4px solid var(--coral);padding:6px 0 6px 16px;margin:26px 0;max-width:60ch}
+  footer{margin-top:56px;padding:22px 0 60px;border-top:3px solid var(--ink);font-size:14px;color:var(--ink2)}
+  .mono{font-family:var(--mono)}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}
+  .btn{font-family:var(--mono);font-size:13px;font-weight:600;text-decoration:none;padding:10px 15px;border:1.5px solid var(--ink);color:var(--ink);background:var(--card)}
+  .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">An Open Dossier · <b>001</b> · self-explaining edition · v1.0</div>
+  <h1>Reading More From Every Photon</h1>
+  <div class="byline">Irfan Ali-Khan — Independent Researcher, Saratoga, California</div>
+  <div class="howto">
+    <b>How to read this:</b> the whole paper is on this one page, written to explain itself.
+    Tap any <button class="term" data-d="Like this! Underlined-dashed words expand in place with a plain-language explanation. Tap again to close. You never leave the page.">underlined term</button>
+    for a plain-language explanation. Tap any <button class="cite" data-c="demo">ref</button> to see what that source actually showed, in two sentences. <span class="mono">No rabbit holes. No prerequisites. The PDF and equations are linked at the bottom for those who want them.</span>
+  </div>
+  <div class="btnrow">
+    <a class="btn primary" href="index.html#verify">Run the paper's numbers</a>
+    <a class="btn" href="paper/manuscript.pdf">Formal PDF</a>
+    <a class="btn" href="dossier.html">Audit trail</a>
+  </div>
+</header>
+
+<h2><span class="num">01</span>The promise hiding in a pair of photons</h2>
+
+<p>Some crystals do something remarkable when you shine a laser through them: occasionally, one photon of laser light splits into two photons, born at the same instant. This process is called
+<button class="term" data-d="Spontaneous parametric down-conversion: shine a strong 'pump' laser into a special nonlinear crystal, and about one in a billion pump photons splits into a pair of 'daughter' photons. Energy is conserved — the two daughters' energies always add up to exactly the parent's energy. That bookkeeping rule is where all the magic in this paper comes from.">down-conversion</button>, and the two photons it produces are
+<button class="term" data-d="Entanglement means two particles share one combined description — measuring one instantly tells you about the other, no matter the distance. Here the photons are entangled in ENERGY and TIME: they were born at the same instant (time correlation), and their energies must sum to the parent photon's energy (energy anti-correlation). Einstein called this 'spooky'; experiments keep confirming it's real.">entangled</button>
+in energy and time. They were born together — to within about a tenth of a trillionth of a second — but *when* the pair is born within any given stretch of time is completely random.</p>
+
+<p>That randomness is not a bug. Shared randomness that two distant people both possess, and no one else does, is the raw material of
+<button class="term" data-d="Quantum key distribution: two people (traditionally 'Alice' and 'Bob') use quantum particles to build an identical secret string of random bits — a 'key' — for encrypting messages. Its superpower: the laws of physics make eavesdropping detectable. If someone intercepts the photons, the act of measuring them leaves fingerprints Alice and Bob can spot.">quantum key distribution</button>:
+Alice keeps one photon, sends Bob the other, and they each write down their photon's arrival time. Because the photons were born together, their two notebooks match — a shared secret delivered by physics.</p>
+
+<p>Now the question this whole field turns on: how many secret bits does each photon pair carry? Here is the striking answer. The pair's birth-moment is sharp to about 100
+<button class="term" data-d="A femtosecond is a millionth of a billionth of a second (10⁻¹⁵ s). Light, the fastest thing there is, travels just 0.03 millimeters in 100 femtoseconds — about the width of a human hair. That's how precisely these two photons are synchronized to each other.">femtoseconds</button>,
+while the window of uncertainty about when it occurs stretches over hundreds of nanoseconds — a million times longer. The number of distinguishable 'slots' the birth could land in is the ratio of those two times, roughly a million, which works out to <b>16–20 bits of potential secret key per photon pair</b>
+<button class="cite" data-c="aliKhanHowell">PRA '06</button>.
+For comparison, most quantum cryptography systems extract less than one bit per detected photon.</p>
+
+<details class="deeper"><summary>Go deeper: the Schmidt number</summary>
+<div class="body">The information content is quantified by the Schmidt number K = T<sub>coh</sub>/τ<sub>c</sub>: the pair's coherence time (set by the pump laser's linewidth, ~0.1–1 μs for a good cw laser) divided by the correlation time (set by the crystal/filter bandwidth, ~100 fs). K counts the independent 'modes' the state occupies.
+<div class="eq">K ≈ 10⁵–10⁶  →  log₂K ≈ 16–20 bits per pair</div>
+This framework comes from Law &amp; Eberly <button class="cite" data-c="lawEberly">PRL '04</button>.</div>
+</details>
+
+<h2><span class="num">02</span>So why do we only get a few bits?</h2>
+
+<p>In 2007, this author and colleagues built the first large-alphabet system on this idea and extracted 4 clean bits per pair
+<button class="cite" data-c="aliKhan2007">PRL '07</button>.
+The best system since reached 6.9 bits
+<button class="cite" data-c="zhong2015">NJP '15</button>.
+Both are far below the 16–20 bits the photons actually carry. The thief is not physics — it's the stopwatch.</p>
+
+<p>Single-photon detectors have
+<button class="term" data-d="Jitter is the detector's timing blur. The photon arrives at one exact instant, but the detector's electrical 'click' wobbles randomly around that instant — by 30 to 350 picoseconds for ordinary detectors, and about 3 picoseconds for the very best cryogenic ones. If the blur is bigger than the feature you're measuring, the feature is lost.">jitter</button>:
+their click smears the true arrival time. The photons are synchronized to 100 femtoseconds, but even a heroic detector blurs that to 3,000 femtoseconds — like photographing a hummingbird's wings with a shutter 30 times too slow. Every factor of two in blur costs one full bit of key. The blur costs us 5–10 bits per pair, every pair, forever.
+The best such detectors, called
+<button class="term" data-d="Superconducting nanowire single-photon detectors: a wire a few atoms thick, cooled near absolute zero, carrying a current just below the superconducting limit. One photon's worth of energy briefly breaks the superconductivity — a measurable blip. They're the gold standard: >90% efficient, almost no false clicks, and as little as ~3 picoseconds of jitter — but they require a cryostat and serious money.">SNSPDs</button>
+<button class="cite" data-c="korzh2020">Nat. Photon. '20</button>, get the blur down to 3 picoseconds — still 30× too slow for these photons.</p>
+
+<p class="punch">For twenty years the field has tried to build a faster stopwatch. This paper asks instead: what if we slow down the hummingbird?</p>
+
+<h2><span class="num">03</span>A magnifying glass for time</h2>
+
+<p>Here is the idea at the heart of this proposal. There is a deep mathematical symmetry in optics: the way a light pulse spreads out as it travels through
+<button class="term" data-d="Dispersion: different colors of light travel at slightly different speeds in glass or fiber. A short pulse contains many colors, so it spreads out as it travels — exactly the way a sprinting crowd spreads out when the runners have different speeds. Usually this is a nuisance engineers fight. This paper recruits it as a tool, twice.">dispersion</button>
+is mathematically identical to the way a light beam spreads out by diffraction as it travels through space. And since a glass lens can undo spatial spreading and form a magnified image, the same trick works in time: a
+<button class="term" data-d="A time lens is the temporal twin of a magnifying glass. A glass lens works by delaying the middle of a light beam more than its edges (a quadratic phase in SPACE). A time lens applies the same quadratic phase in TIME — using a fast electro-optic modulator or a nonlinear optical mixing process. Sandwiched between two stretches of dispersion, it magnifies a waveform's time axis: events 1 picosecond apart come out 100 picoseconds apart, where a sluggish detector can easily tell them apart.">time lens</button>
+sandwiched between two dispersive elements stretches a waveform's time axis by a magnification M
+<button class="cite" data-c="kolner">Opt. Lett. '89</button>.</p>
+
+<p>Put one in front of your detector, and events too fast for the detector get magnified until they're slow enough to see. The detector never improved — the moment got bigger. And this is not speculative: a single-photon time lens with magnification <b>M = 158</b> and picosecond-scale resolution was demonstrated in 2022, by a group that built it explicitly to beat detector jitter
+<button class="cite" data-c="joshi2022">Optica '22</button>.
+Time lenses have also already magnified the correlations of entangled photon pairs
+<button class="cite" data-c="mittal2017">PRA '17</button>
+and compressed single-photon bandwidths
+<button class="cite" data-c="karpinski2017">Nat. Photon. '17</button>.</p>
+
+<p>What nobody had done — to our knowledge — is put this tool inside a cryptography protocol. That integration, with the math of how many bits it recovers and when it pays for itself, is the core contribution of this paper. The headline: with a demonstrated lens and an ordinary 30-picosecond detector, the recoverable key jumps to about <b>13 bits per pair</b> — and the cheap-detector-plus-lens combination beats the most exotic cryogenic detector used alone. Room-temperature optics substituting for heroic cryogenics.</p>
+
+<details class="deeper"><summary>Go deeper: the resolution formula and the break-even rule</summary>
+<div class="body">With magnification M and lens point-spread δτ<sub>L</sub>, each receiver's effective timing error becomes
+<div class="eq">ε = √[(τ_jitter/M)² + δτ_L²]</div>
+and the extractable bits per pair are log₂[T_frame/(α·σ_obs)] where σ_obs combines ε from both receivers with the intrinsic 100 fs correlation. A lens with efficiency η<sub>L</sub> (it loses some photons) pays for itself photon-for-photon when η<sub>L</sub> &gt; I(without)/I(with) — about 0.66 for the 30-ps example. But the deeper point: modern photon sources are so bright that DETECTORS, not photons, are the bottleneck. In that regime you simply turn up the source to compensate lens loss, and every extra bit multiplies the key rate nearly for free. Every number in this paragraph is recomputed live by the <a href="index.html#verify">verification console</a>.</div>
+</details>
+
+<h2><span class="num">04</span>Catching an eavesdropper without an interferometer</h2>
+
+<p>A key is only secret if you can prove nobody intercepted it. The quantum trick is to measure the photons in two
+<button class="term" data-d="Two measurement types are 'conjugate' when sharpening one inevitably blurs the other — like position and momentum in Heisenberg's uncertainty principle. Time and frequency (energy) are conjugate. An eavesdropper who pins down a photon's arrival TIME unavoidably scrambles its FREQUENCY correlations. So Alice and Bob check both: time correlations make the key, frequency correlations stand guard.">conjugate ways</button>
+— time for the key, energy for the alarm system. An eavesdropper ('Eve') who measures arrival times precisely enough to steal the key must, by the uncertainty principle itself, damage the energy correlations. Alice and Bob check those correlations on a sample of pairs; intact correlations mathematically bound how much Eve can know
+<button class="cite" data-c="zhang2014">PRL '14</button>.</p>
+
+<p>The 2007 experiment did this energy check with interferometers — but that classic method has a genuine, demonstrated security hole: it relies on
+<button class="term" data-d="Postselection means throwing away some measurement results and keeping others — here, keeping only photon pairs that took matching paths through the interferometers. The problem: an attacker can exploit the discarded events to fake a 'secure' signal. In 2015 researchers demonstrated this attack using ordinary classical light — no quantum trickery needed — fully fooling the security check.">postselection</button>,
+and in 2015 that hole was exploited in a live attack using nothing but classical light
+<button class="cite" data-c="jogenfors2015">Sci. Adv. '15</button>.</p>
+
+<p>This paper instead uses the dispersive check, proposed at MIT in 2013
+<button class="cite" data-c="mower2013">PRA '13</button>:
+Alice's photon passes through normal dispersion, Bob's through equal-and-opposite anomalous dispersion. Here physics does something genuinely strange, called
+<button class="term" data-d="Nonlocal dispersion cancellation (Franson, 1992): spread Alice's photon with dispersion, spread Bob's photon with OPPOSITE dispersion — and although each photon individually becomes a nanosecond-long blur, their joint timing correlation snaps back to razor sharpness. The two photons never meet again after birth; the cancellation lives only in the comparison of the two notebooks. It works because their energies are anti-correlated: what dispersion delays in one, it advances in the other, perfectly.">nonlocal dispersion cancellation</button>
+<button class="cite" data-c="franson1992">PRA '92</button>:
+each photon alone becomes a featureless blur, but the pair's correlation stays sharp — if and only if the entanglement survived the journey intact. Eve's tampering shows up as broadening. No interferometers, no path postselection, no known loophole of that kind — and it's been demonstrated in a working QKD system
+<button class="cite" data-c="lee2014">PRA '14</button>.</p>
+
+<h2><span class="num">05</span>The strange one: a lens that exists only in coincidences</h2>
+
+<p>The same anti-correlation that powers the security check permits something stranger. A time lens needs three parts: input dispersion, the lens, output dispersion. Because dispersion on Bob's photon acts — in the joint correlations — exactly like dispersion on Alice's, the three parts <i>don't have to be on the same photon's path</i>. The dispersion of Bob's own delivery fiber — normally an impairment to be compensated — can serve as the input element, with the lens and output dispersion sitting entirely on Alice's bench. No single photon passes through a complete imaging system. Bob's receiver holds nothing but a detector. Yet the joint correlation — the thing the key is made of — comes out magnified.</p>
+
+<div class="openclaim">
+<span class="tag">OPEN-UNVERIFIED</span><b>Honest label:</b> this distributed-lens claim is published as a conjecture. The formal derivation has not been carried through by anyone, human or machine — by deliberate choice, as part of this dossier's verification doctrine. It is claim <span class="mono">C11</span> in the public ledger, and it is an open challenge: <b>the first person to confirm or refute it gets named credit in v1.1.</b> The mathematical tools exist <button class="cite" data-c="tsang2006">PRA '06</button>. Fork the repo and have at it.
+</div>
+
+<h2><span class="num">06</span>The numbers, honestly</h2>
+
+<p>Where does this land against the world? The fastest quantum key system ever demonstrated runs at 115.8 megabits per second
+<button class="cite" data-c="li2023">Nat. Photon. '23</button>.
+This proposal projects a comparable order — about 10⁸ bits per second — so we claim <i>parity</i> with the overall record, not supremacy. The honest pitch is different: those record systems extract <i>less than one bit per detected photon</i> and win by clocking blindingly fast. This protocol extracts <b>~13–15 bits per detected pair</b>. Wherever detected photons are the scarce resource — long fibers, satellites, saturated detectors, many users sharing a network — bits-per-photon is what sets the speed limit, and there this approach wins by an order of magnitude. Against its own family, entanglement-based time-energy systems, the projected gain is about a hundredfold
+<button class="cite" data-c="zhong2015">NJP '15</button>.</p>
+
+<p>And one receipt that matters more than any projection: during this paper's own pre-launch audit, the verification pipeline caught the results table overstating these numbers by about 2 bits. It was corrected in public before launch, and the catch is documented in the <a href="dossier.html">audit trail</a>. The checks you can run on this page are the same ones that drew that blood.</p>
+
+<h2><span class="num">07</span>What's still open, and how to attack it</h2>
+
+<p>Published with this paper, not hidden from it: seven open findings from the adversarial review. The two biggest, in plain terms. First, the lens has a limited time 'window', while the photons can arrive anywhere in a much longer frame — a real tension between the protocol's two key assumptions, acknowledged but not yet quantified. Second, the 'turn up the source to pay for lens loss' argument needs one inequality pinned down about how hard you can pump before multi-pair noise bites. Both are stated in the manuscript as caveats, both are tickets anyone can claim. The full list, with severity rankings, lives in the <a href="dossier.html">audit trail</a> — and the repository's issues page is the review venue. Disagreement is a contribution.</p>
+
+<p class="punch">Don't trust this paper. Run it, expand it, attack it — it was built to survive that, in public.</p>
+
+<footer>
+  <b>About this edition:</b> this page is the complete paper in self-explaining form — every term and citation expands in place, written so that a motivated high-school student can follow the entire argument without leaving the page. The <a href="paper/manuscript.pdf">formal PDF</a> exists for tradition and archives; the <a href="index.html">interactive edition</a> carries the live calculators and verification console; the <a href="dossier.html">audit trail</a> carries the receipts.
+  <br><br><span class="mono">An Open Dossier · CC BY 4.0 · built with substantive AI assistance (Claude, Anthropic), including this explanation layer · every verification label is true</span>
+</footer>
+
+</div>
+
+<script>
+// citation database — plain-language summaries of what each source showed
+const CITES = {
+  demo:        {who:"This is a citation chip", what:"Tap any chip like this one and you get the source plus a two-sentence plain-language summary of what it actually showed — instead of a bare [7] sending you down a rabbit hole.", src:"You never leave the page."},
+  aliKhan2007: {who:"Ali-Khan, Broadbent & Howell (2007)", what:"The first large-alphabet QKD experiment using energy-time entangled photon arrival times: 4 clean bits of key per photon pair, with security monitored by interference fringes. The direct ancestor of this paper.", src:"Phys. Rev. Lett. 98, 060503"},
+  aliKhanHowell:{who:"Ali Khan & Howell (2006)", what:"Measured how much entanglement cw-pumped photon pairs actually carry, and showed theory predicts up to ~10⁶ information modes per pair — the '20 bits are in there' result this whole program rests on.", src:"Phys. Rev. A 73, 031801(R)"},
+  lawEberly:   {who:"Law & Eberly (2004)", what:"Established the Schmidt-mode framework for counting the independent information modes in down-converted photon pairs — the math behind 'K = coherence time over correlation time'.", src:"Phys. Rev. Lett. 92, 127903"},
+  zhong2015:   {who:"Zhong et al., MIT (2015)", what:"The photon-efficiency record for this family: 6.9 bits of secure key per detected coincidence at 2.7 Mb/s, using clever layered error-correction. The benchmark this proposal aims to roughly double.", src:"New J. Phys. 17, 022002"},
+  korzh2020:   {who:"Korzh et al., JPL/NIST (2020)", what:"Demonstrated a superconducting nanowire detector with under 3 picoseconds of timing jitter — the best single-photon stopwatch ever built. Still ~30× too blurry for these photons' 100 fs correlations.", src:"Nat. Photonics 14, 250"},
+  kolner:      {who:"Kolner & Nazarathy (1989)", what:"Founded temporal imaging: showed that dispersion + quadratic temporal phase + dispersion magnifies waveforms in time exactly as a glass lens magnifies images in space.", src:"Opt. Lett. 14, 630"},
+  joshi2022:   {who:"Joshi et al., Gaeta group (2022)", what:"Built a single-photon time lens with magnification 158 and ~picosecond resolution — explicitly to overcome detector jitter. The enabling component of this proposal, demonstrated and published.", src:"Optica 9, 364"},
+  mittal2017:  {who:"Mittal et al. (2017)", what:"Used a time lens to magnify the temporal correlations of entangled photon pairs that were otherwise invisible to detectors — proving the lens preserves the quantum correlations this protocol needs.", src:"Phys. Rev. A 96, 043807"},
+  karpinski2017:{who:"Karpiński et al. (2017)", what:"Compressed the bandwidth of single photons with an electro-optic time lens, showing this family of devices manipulates genuinely quantum light without destroying it.", src:"Nat. Photonics 11, 53"},
+  zhang2014:   {who:"Zhang, Mower, Englund, Wong & Shapiro (2014)", what:"Proved the security of time-energy entanglement QKD: measuring time and frequency correlation widths mathematically bounds an eavesdropper's maximum knowledge, via an entropic uncertainty relation.", src:"Phys. Rev. Lett. 112, 120506"},
+  jogenfors2015:{who:"Jogenfors et al. (2015)", what:"Hacked interferometer-based (Franson) security checks using only classical laser light — a faked 'secure' signal with zero entanglement. The demonstrated loophole this paper's dispersive check avoids by construction.", src:"Sci. Adv. 1, e1500793"},
+  mower2013:   {who:"Mower et al., MIT (2013)", what:"Proposed dispersive-optics QKD: replace the loophole-prone interferometers with opposite-sign dispersion on the two photons, reading frequency correlations with ordinary timing detectors.", src:"Phys. Rev. A 87, 062322"},
+  franson1992: {who:"Franson (1992)", what:"Predicted nonlocal dispersion cancellation: opposite dispersion applied to two separated entangled photons cancels — but only in their joint correlations. Confirmed experimentally in 2009. The strangeness this paper uses twice.", src:"Phys. Rev. A 45, 3126"},
+  lee2014:     {who:"Lee et al., MIT (2014)", what:"Demonstrated a working entanglement QKD link secured by nonlocal dispersion cancellation — proving the security architecture this proposal builds on runs in real hardware.", src:"Phys. Rev. A 90, 062331"},
+  li2023:      {who:"Li et al., USTC (2023)", what:"The overall QKD speed record: 115.8 megabits of secure key per second over 10 km of fiber, with a fast-clocked prepare-and-measure system extracting under 1 bit per detected photon.", src:"Nat. Photonics 17, 416"},
+  tsang2006:   {who:"Tsang & Psaltis (2006)", what:"Worked out how temporal entanglement propagates through dispersive and time-lens systems — the mathematical machinery a challenger would use to settle this paper's open claim C11.", src:"Phys. Rev. A 73, 013822"}
+};
+
+// one shared toggle behavior for terms and citations
+function closeCard(btn){ const c = btn._card; if(c){ c.remove(); btn._card = null; btn.setAttribute('aria-expanded','false'); } }
+function toggle(btn, html, extraClass){
+  if(btn._card){ closeCard(btn); return; }
+  const card = document.createElement('span');
+  card.className = 'popcard' + (extraClass ? ' ' + extraClass : '');
+  card.innerHTML = html;
+  // insert after the end of the current paragraph-level parent for clean layout
+  const block = btn.closest('p, .howto, .body, .openclaim') || btn.parentNode;
+  block.insertAdjacentElement('afterend', card);
+  btn._card = card; btn.setAttribute('aria-expanded','true');
+}
+document.querySelectorAll('.term').forEach(btn=>{
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click', ()=> toggle(btn, btn.dataset.d));
+});
+document.querySelectorAll('.cite').forEach(btn=>{
+  btn.setAttribute('aria-expanded','false');
+  btn.addEventListener('click', ()=>{
+    const c = CITES[btn.dataset.c];
+    if(!c) return;
+    toggle(btn, '<b>'+c.who+':</b> '+c.what+'<span class="src">'+c.src+'</span>', 'citecard');
+  });
+});
+</script>
+</body>
+</html>
