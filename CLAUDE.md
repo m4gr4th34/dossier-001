@@ -4,7 +4,7 @@ This repo is an Open Dossier: a living research publication. These rules
 are non-negotiable and apply to every session.
 
 ## Before any commit
-- Run `python verification/verify_numbers.py`. If any check fails,
+- Run `python3 verification/verify_numbers.py`. If any check fails,
   fix the manuscript or the model — NEVER widen a tolerance to pass.
 - If a change alters any number in the paper, the corresponding check
   in verify_numbers.py AND the JS port in index.html must be updated

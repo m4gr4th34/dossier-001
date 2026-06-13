@@ -32,7 +32,7 @@ versioned, and the adversarial review ships with the work.**
 ## Run it
 
 ```bash
-python verification/verify_numbers.py
+python3 verification/verify_numbers.py
 ```
 
 Sixteen checks recompute every number in the manuscript from its stated
