@@ -1,0 +1,10 @@
+{
+  "title": "Temporal-Imaging-Enhanced Dispersive-Optics Quantum Key Distribution: Approaching the Schmidt Limit of Energy-Time Entanglement (Dossier 001)",
+  "creators": [{"name": "Ali-Khan, Irfan", "affiliation": "Independent Researcher, Saratoga, California, USA"}],
+  "description": "A living, executable research publication proposing time-lens-enhanced dispersive-optics QKD with energy-time entangled photons. Every quantitative claim is recomputed by an included verification script under CI; the adversarial review, citation audit, and dated amendments ship with the work. Releases are independently archived and blockchain-timestamped.",
+  "upload_type": "publication",
+  "publication_type": "preprint",
+  "access_right": "open",
+  "license": "cc-by-4.0",
+  "keywords": ["quantum key distribution", "energy-time entanglement", "time lens", "temporal imaging", "dispersive optics", "open dossier", "verified open research"]
+}
