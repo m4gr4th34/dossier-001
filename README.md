@@ -23,6 +23,21 @@ And, deliberately, it is also a working specimen of a publication format:
 **every quantitative claim in the paper is executable, every revision is
 versioned, and the adversarial review ships with the work.**
 
+## Publish your own
+
+This paper is the reference specimen of the **Open Dossier format**,
+and the format is the larger point. Everything here — the executable
+claims under CI, the self-explaining edition, the published
+adversarial review and dated amendments, the auto-DOI'd and
+blockchain-timestamped releases — comes from a free template:
+
+**→ [open-dossier-template](https://github.com/m4gr4th34/open-dossier-template)**
+
+Click "Use this template," fill in the TODO markers, tag a release:
+roughly twenty minutes from idea to a live, archived, verifiable
+publication — no journal, no gatekeeper, no fees. The format spreads
+by being copied. Dossier 002 is meant to be yours.
+
 ## Read it
 
 - **Living paper (start here):** https://m4gr4th34.github.io/dossier-001/
