@@ -82,6 +82,10 @@
   footer .mono{font-family:var(--mono)}
   @media (prefers-reduced-motion: reduce){ .row{transition:none !important} }
   @media (max-width:560px){ .row{flex-wrap:wrap} .row .nums{width:100%;padding-left:46px} th:nth-child(1),td:nth-child(1){display:none} }
+  .cta{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px}
+  .btn{font-family:var(--mono);font-size:13.5px;font-weight:600;text-decoration:none;padding:11px 16px;border:1.5px solid var(--ink);color:var(--ink);background:var(--card)}
+  .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+  .btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
   .publish-cta{margin:46px 0 8px;padding:22px 24px;border:1.5px solid var(--teal);background:var(--teal-soft,#e3f0f0);
     display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;justify-content:space-between}
   .publish-cta .pc-text{flex:1 1 320px;min-width:0}
@@ -104,6 +108,13 @@
     <span class="chip"><span class="dot g"></span>citations&nbsp;<b>36 verified · 1 flagged</b></span>
     <span class="chip"><span class="dot o"></span>red team&nbsp;<b>1 resolved · 7 open</b></span>
     <span class="chip"><span class="dot t"></span>human residue&nbsp;<b>3 items</b></span>
+  </div>
+  <div class="cta">
+    <a class="btn" href="index.html">Explore the result</a>
+    <a class="btn" href="paper.html">Self-explaining edition</a>
+    <a class="btn" href="paper/manuscript.pdf">Read the PDF</a>
+    <a class="btn primary" href="dossier.html">Audit trail</a>
+    <a class="btn" href="https://github.com/m4gr4th34/dossier-001">Source &amp; issues</a>
   </div>
 </header>
 
