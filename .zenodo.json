@@ -6,5 +6,6 @@
   "publication_type": "preprint",
   "access_right": "open",
   "license": "cc-by-4.0",
-  "keywords": ["quantum key distribution", "energy-time entanglement", "time lens", "temporal imaging", "dispersive optics", "open dossier", "verified open research"]
+  "keywords": ["quantum key distribution", "energy-time entanglement", "time lens", "temporal imaging", "dispersive optics", "open dossier", "verified open research"],
+  "communities": [{"identifier": "open-dossier"}]
 }
