@@ -29,6 +29,8 @@
   .cta{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px}
   .btn{font-family:var(--mono);font-size:13.5px;font-weight:600;text-decoration:none;padding:11px 16px;border:1.5px solid var(--ink);color:var(--ink);background:var(--card)}
   .btn.primary{background:var(--teal);border-color:var(--teal);color:#fff}
+  .btn-publish{background:var(--teal);border-color:var(--teal);color:#fff}
+  .btn-publish:hover{background:#0a615f}
   .btn:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
   section{padding:40px 0 8px}
   h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:0 0 4px}
@@ -129,7 +131,7 @@
     <a class="btn" href="paper/manuscript.pdf">Read the PDF</a>
     <a class="btn" href="dossier.html">Audit trail</a>
     <a class="btn" id="repolink" href="https://github.com/m4gr4th34/dossier-001">Source &amp; issues</a>
-    <a class="btn" href="https://github.com/m4gr4th34/open-dossier-template">Publish like this</a>
+    <a class="btn btn-publish" href="https://github.com/m4gr4th34/open-dossier-template">Publish like this</a>
   </div>
 </header>
 
@@ -214,7 +216,7 @@
 </div>
 
 <footer>
-  <b>How to review this paper:</b> run the checks, drag the sliders past their stated ranges, read the <a href="dossier.html">red-team findings</a> (1 resolved, 7 open — published, not hidden), then <a id="issuelink" href="https://github.com/m4gr4th34/dossier-001/issues">file an issue against any claim</a>. One claim is posted as an open challenge: the Section&nbsp;5 nonlocal-imaging derivation is labeled <span class="mono">OPEN-UNVERIFIED</span> in the claim ledger — the first correct treatment, confirming or refuting, is credited in v1.1. Every revision is versioned; nothing is memory-holed. Archived releases carry a DOI via Zenodo. <b>Want to publish like this?</b> The format is a free template — <a href="https://github.com/m4gr4th34/open-dossier-template">open-dossier-template</a>: executable claims, self-explaining edition scaffold, auto-DOI and auto-timestamped releases, about twenty minutes from idea to live publication.
+  <b>How to review this paper:</b> run the checks, drag the sliders past their stated ranges, read the <a href="dossier.html">red-team findings</a> (1 resolved, 7 open — published, not hidden), then <a id="issuelink" href="https://github.com/m4gr4th34/dossier-001/issues">file an issue against any claim</a>. One claim is posted as an open challenge: the Section&nbsp;5 nonlocal-imaging derivation is labeled <span class="mono">OPEN-UNVERIFIED</span> in the claim ledger — the first correct treatment, confirming or refuting, is credited in v1.1. Every revision is versioned; nothing is memory-holed. Archived releases carry a DOI via Zenodo.
   <br><br><span class="mono">Verification model: every claim carries a public, granular status — machine-recomputed, source-audited, reality-checked, or open. Claims nobody has verified are labeled, never asserted. AI-assistance disclosure: built with substantive AI assistance (Claude, Anthropic) — literature search, prior-art analysis, drafting, rate modeling, verification tooling, and this site. Responsibility rests with the author on the explicitly stated review basis above. · License: CC BY 4.0 (paper) / MIT (code)</span>
 </footer>
 
