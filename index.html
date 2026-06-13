@@ -99,6 +99,14 @@
 .provenance a.pv-item .pv-v{color:var(--teal)}
 #pv-state{color:var(--open,#b07d1f)}
 @media(max-width:560px){.provenance .pv-item{flex:1 1 45%;border-bottom:1px solid var(--line)}}
+.publish-cta{margin:46px 0 8px;padding:22px 24px;border:1.5px solid var(--teal);background:var(--teal-soft,#e3f0f0);
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;justify-content:space-between}
+.publish-cta .pc-text{flex:1 1 320px;min-width:0}
+.publish-cta .pc-h{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--ink);margin:0 0 3px}
+.publish-cta .pc-sub{font-size:14px;color:var(--ink2);margin:0}
+.publish-cta a.pc-btn{flex:0 0 auto;font-family:var(--mono);font-size:14px;font-weight:600;text-decoration:none;
+  background:var(--teal);color:#fff;padding:12px 20px;white-space:nowrap}
+.publish-cta a.pc-btn:hover{background:#0a615f}
 </style>
 </head>
 <body>
@@ -196,6 +204,14 @@
       <div class="body">Record QKD systems extract ≲1 bit per detected photon and win by clocking fast. Wherever detected photons are the scarce resource — long-haul fiber, satellites, saturated detectors, multiplexed networks — photon information efficiency sets the rate. Moving PIE from ~7 to ~13–15 bits is the claim of this work.</div></details>
   </div>
 </section>
+
+<div class="publish-cta">
+  <div class="pc-text">
+    <p class="pc-h">Want to publish like this?</p>
+    <p class="pc-sub">Open Dossier is a free template — executable claims, a self-explaining edition, a DOI and blockchain timestamp on every release. From idea to live publication in an afternoon, with an AI agent doing the heavy lifting. No LaTeX, no gatekeepers, no fees.</p>
+  </div>
+  <a class="pc-btn" href="https://github.com/m4gr4th34/open-dossier-template">Publish your own →</a>
+</div>
 
 <footer>
   <b>How to review this paper:</b> run the checks, drag the sliders past their stated ranges, read the <a href="dossier.html">red-team findings</a> (1 resolved, 7 open — published, not hidden), then <a id="issuelink" href="https://github.com/m4gr4th34/dossier-001/issues">file an issue against any claim</a>. One claim is posted as an open challenge: the Section&nbsp;5 nonlocal-imaging derivation is labeled <span class="mono">OPEN-UNVERIFIED</span> in the claim ledger — the first correct treatment, confirming or refuting, is credited in v1.1. Every revision is versioned; nothing is memory-holed. Archived releases carry a DOI via Zenodo. <b>Want to publish like this?</b> The format is a free template — <a href="https://github.com/m4gr4th34/open-dossier-template">open-dossier-template</a>: executable claims, self-explaining edition scaffold, auto-DOI and auto-timestamped releases, about twenty minutes from idea to live publication.

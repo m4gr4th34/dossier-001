@@ -73,6 +73,14 @@
 .provenance a.pv-item .pv-v{color:var(--teal)}
 #pv-state{color:var(--open,#b07d1f)}
 @media(max-width:560px){.provenance .pv-item{flex:1 1 45%;border-bottom:1px solid var(--line)}}
+.publish-cta{margin:46px 0 8px;padding:22px 24px;border:1.5px solid var(--teal);background:var(--teal-soft,#e3f0f0);
+  display:flex;flex-wrap:wrap;align-items:center;gap:14px 20px;justify-content:space-between}
+.publish-cta .pc-text{flex:1 1 320px;min-width:0}
+.publish-cta .pc-h{font-family:var(--serif);font-weight:700;font-size:20px;color:var(--ink);margin:0 0 3px}
+.publish-cta .pc-sub{font-size:14px;color:var(--ink2);margin:0}
+.publish-cta a.pc-btn{flex:0 0 auto;font-family:var(--mono);font-size:14px;font-weight:600;text-decoration:none;
+  background:var(--teal);color:#fff;padding:12px 20px;white-space:nowrap}
+.publish-cta a.pc-btn:hover{background:#0a615f}
 </style>
 </head>
 <body>
@@ -209,6 +217,14 @@ This proposal projects a comparable order — about 10⁸ bits per second — so
 <p>Published with this paper, not hidden from it: seven open findings from the adversarial review. The two biggest, in plain terms. First, the lens has a limited time 'window', while the photons can arrive anywhere in a much longer frame — a real tension between the protocol's two key assumptions — sharpened hours after launch by the author's own reality check into a ~1/M per-channel acceptance penalty, logged as <a href="https://github.com/m4gr4th34/dossier-001/issues/1">issue #1</a>. Second, the 'turn up the source to pay for lens loss' argument needs one inequality pinned down about how hard you can pump before multi-pair noise bites. Both are stated in the manuscript as caveats, both are tickets anyone can claim. The full list, with severity rankings, lives in the <a href="dossier.html">audit trail</a> — and the repository's issues page is the review venue. Disagreement is a contribution.</p>
 
 <p class="punch">Don't trust this paper. Run it, expand it, attack it — it was built to survive that, in public.</p>
+
+<div class="publish-cta">
+  <div class="pc-text">
+    <p class="pc-h">Want to publish like this?</p>
+    <p class="pc-sub">You just read a paper that explains itself. You can publish one too — Open Dossier is a free template, and an AI agent does the drafting, typesetting, citations, and verification. Idea to live publication in an afternoon.</p>
+  </div>
+  <a class="pc-btn" href="https://github.com/m4gr4th34/open-dossier-template">Publish your own →</a>
+</div>
 
 <footer>
   <b>About this edition:</b> this page is the complete paper in self-explaining form — every term and citation expands in place, written so that a motivated high-school student can follow the entire argument without leaving the page. The <a href="paper/manuscript.pdf">formal PDF</a> exists for tradition and archives; the <a href="index.html">interactive edition</a> carries the live calculators and verification console; the <a href="dossier.html">audit trail</a> carries the receipts. This paper is the reference specimen of the <a href="https://github.com/m4gr4th34/open-dossier-template">Open Dossier format</a> — a free template anyone can use: your own executable, self-explaining, auto-archived publication in about twenty minutes.
