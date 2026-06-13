@@ -90,6 +90,15 @@
   .mono{font-family:var(--mono)}
   @media (prefers-reduced-motion: reduce){ #you{transition:none} .row{transition:none !important} }
   @media (max-width:560px){ .big{font-size:42px} .row{flex-wrap:wrap} .row .nums{width:100%;padding-left:46px} }
+.provenance{display:flex;flex-wrap:wrap;gap:0;margin:18px 0 4px;border:1.5px solid var(--ink);background:var(--card);font-family:var(--mono);font-size:12px;overflow:hidden}
+.provenance .pv-item{display:flex;flex-direction:column;gap:2px;padding:9px 14px;border-right:1px solid var(--line);text-decoration:none;color:var(--ink);min-width:0}
+.provenance .pv-item:last-child{border-right:none}
+.provenance a.pv-item:hover{background:var(--teal-soft,#e3f0f0)}
+.provenance .pv-k{font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+.provenance .pv-v{font-size:12.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.provenance a.pv-item .pv-v{color:var(--teal)}
+#pv-state{color:var(--open,#b07d1f)}
+@media(max-width:560px){.provenance .pv-item{flex:1 1 45%;border-bottom:1px solid var(--line)}}
 </style>
 </head>
 <body>
@@ -99,6 +108,12 @@
   <div class="eyebrow">An Open Dossier · <b>001</b> · v1.0.1 (living) · June 2026</div>
   <h1>Temporal-Imaging-Enhanced Dispersive-Optics Quantum Key Distribution</h1>
   <div class="byline">Irfan Ali-Khan — Independent Researcher, Saratoga, California</div>
+  <div class="provenance" role="contentinfo" aria-label="Provenance and verification">
+    <span class="pv-item"><span class="pv-k">Reading</span><span class="pv-v" id="pv-state">live tip</span></span>
+    <a class="pv-item" id="pv-doi" href="#" target="_blank" rel="noopener"><span class="pv-k">Archived DOI</span><span class="pv-v" id="pv-doi-v">loading… ↗</span></a>
+    <a class="pv-item" href="timestamps/" target="_blank" rel="noopener"><span class="pv-k">Bitcoin timestamp</span><span class="pv-v">verify proof ↗</span></a>
+    <a class="pv-item" href="https://github.com/m4gr4th34/dossier-001" target="_blank" rel="noopener"><span class="pv-k">Source</span><span class="pv-v">full history ↗</span></a>
+  </div>
   <p class="abstract">Energy–time entangled photon pairs carry 16–20 bits of potential key per coincidence; demonstrated systems extract 3–7, limited by detector timing jitter. This work proposes placing <b>single-photon time lenses</b> inside the receivers of a dispersive-optics QKD link, magnifying arrival-time structure before detection so the effective resolution beats the jitter by the magnification <i>M</i> — projecting 13–15 bits per coincidence and key rates of order 10<sup>8</sup> b/s from demonstrated components (rate figure amended hours after launch: architecture-dependent, <a href="https://github.com/m4gr4th34/dossier-001/issues/1">issue #1</a>), with a <b>nonlocal variant</b> in which the fiber's own dispersion completes an imaging system that exists only in coincidences. Every number below is recomputable in your browser. <b>Don't trust this paper — run it.</b></p>
   <div class="cta">
     <a class="btn primary" href="#explore">Explore the result</a>
@@ -274,6 +289,14 @@ runBtn.addEventListener('click',()=>{
     }
   });
 });
+</script>
+<script>
+fetch('provenance.json').then(r=>r.json()).then(p=>{
+  const d=document.getElementById('pv-doi'), v=document.getElementById('pv-doi-v');
+  d.href='https://doi.org/'+p.version_doi; v.textContent=p.version_doi+' ↗';
+  document.getElementById('pv-state').textContent='release '+p.release_tag+' (+ live edits)';
+}).catch(()=>{document.getElementById('pv-doi-v').textContent='see repository ↗';
+  document.getElementById('pv-doi').href='https://github.com/m4gr4th34/dossier-001';});
 </script>
 </body>
 </html>
