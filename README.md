@@ -4,6 +4,8 @@
 *Don't trust this paper — run it.*
 Irfan Ali-Khan · Independent Researcher · Saratoga, California · June 2026
 
+### ▶ [Read the living paper](https://m4gr4th34.github.io/dossier-001/) · [Self-explaining edition](https://m4gr4th34.github.io/dossier-001/paper.html) · [Run the checks](https://m4gr4th34.github.io/dossier-001/#verify) · [Audit trail](https://m4gr4th34.github.io/dossier-001/dossier.html)
+
 [![claims: verified](https://github.com/m4gr4th34/dossier-001/actions/workflows/verify.yml/badge.svg)](https://github.com/m4gr4th34/dossier-001/actions/workflows/verify.yml)
 <!-- After Zenodo release, paste your DOI badge here: -->
 <!-- [![DOI](https://zenodo.org/badge/1267581633.svg)](https://doi.org/10.5281/zenodo.20670769) -->
